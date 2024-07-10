@@ -1,18 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Random Task Picker</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-
-
-    <!-- -->
-
-
-	<script src="index.js"></script>
+    <h1>Random Task Picker</h1>
+    <div id="random-task-picker">
+      <div id="random-task-picker-description-container">Don't know where to start? Add some tasks, and we will tell you what to tackle first!</div>
+      <button id="open-task-form-btn" class="btn large-btn">
+        Add New Task
+      </button>
+      <form id="task-form" class="task-form hidden">
+        <div id="task-form-header">
+          <button id="close-task-form-btn" type="button" aria-label="close">
+            <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px"><path fill="#F44336" d="M21.5 4.5H26.501V43.5H21.5z" transform="rotate(45.001 24 24)" /><path fill="#F44336" d="M21.5 4.5H26.5V43.501H21.5z" transform="rotate(135.008 24 24)" /></svg>
+          </button>
+        </div>
+        <div id="task-form-body">
+          <label class="task-form-label" for="task-input">Input Task</label>
+          <input required id="task-title-input" type="text">
+          <label class="task-form-label" for="description-input">Description</label>
+          <textarea id="description-input" cols="30" rows="5"></textarea>
+        </div>
+        <div id="task-form-footer">
+<button id="add-or-update-task-btn" class="btn large-btn" type="submit">Add or Update Task</button>
+        </div>
+      </form>
+      <div id="tasks-container"></div>
+      <div id="random-task-picker-output" class="random-task-picker-output hidden">You should: </div>
+    </div>
+    <script src="index.js"></script>
   </body>
 </html>
