@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <main>
     <h1>Random Task Picker</h1>
-    <div id="random-task-picker">
+    <div class="random-task-picker">
       <div id="random-task-picker-description-container">Don't know where to start? Add some tasks, and we will tell you what to tackle first!</div>
       <button id="open-task-form-btn" class="btn large-btn">
         Add New Task
@@ -24,15 +25,29 @@
           <label class="task-form-label" for="task-input">Input Task</label>
           <input required id="task-title-input" type="text">
           <label class="task-form-label" for="description-input">Description</label>
-          <textarea id="description-input" cols="30" rows="5"></textarea>
+          <textarea id="task-description-input" cols="30" rows="5"></textarea>
         </div>
         <div id="task-form-footer">
 <button id="add-or-update-task-btn" class="btn large-btn" type="submit">Add or Update Task</button>
         </div>
       </form>
+      <dialog id="confirm-close-dialog">
+        <form method="dialog">
+          <p class="discard-message-text">Discard unsaved changes?</p>
+          <div class="confirm-close-dialog-btn-container">
+            <button id="cancel-btn" class="btn">
+              Cancel
+            </button>
+            <button id="discard-btn" class="btn">
+              Discard
+            </button>
+          </div>
+        </form>
+      </dialog>
       <div id="tasks-container"></div>
       <div id="random-task-picker-output" class="random-task-picker-output hidden">You should: </div>
     </div>
+  </main>
     <script src="index.js"></script>
   </body>
 </html>
