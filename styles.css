@@ -202,3 +202,16 @@ h1 {
       margin-bottom: 20px;
     }
   }
+
+  #randomize-tasks-container {
+    background-color: var(--light-color);
+    color: var(--punch-color);
+    font-family: var(--font-family);
+    font-weight: 650;
+    border: 5px solid var(--dark-color);
+    border-radius: 8px;
+    padding: 15px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
