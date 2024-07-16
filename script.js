@@ -18,6 +18,12 @@ const randomTaskOutput = document.getElementById("random-task-output");
 
 const taskData = [];
 let currentTask = {};
+const reset = () => {
+    taskTitleInput = "";
+    taskDescriptionInput = "";
+    taskForm.classList.toggle("hidden");
+    currentTask = {};
+}
 
 // edit or delete tasks //
 
@@ -27,24 +33,31 @@ let currentTask = {};
 
 // button functionality //
 openTaskFormBtn.addEventListener("click", (e) => taskForm.classList.toggle("hidden"));
-closeTaskFormBtn.addEventListener("click", (e) => confirmCloseDialog.showModal());
+closeTaskFormBtn.addEventListener("click", (e) => {
+    const formInputsContainValues = taskTitleInput.value || taskDescriptionInput.value;
+    if (formInputsContainValues) {
+        confirmCloseDialog.showModal();
+    } else {
+        reset();
+    }
+});
 cancelBtn.addEventListener("click", (e) => confirmCloseDialog.close());
 discardBtn.addEventListener("click", (e) => {
-        confirmCloseDialog.close();
-        taskForm.classList.toggle("hidden");
+    confirmCloseDialog.close();
+    reset();
 });
 taskForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const dataArrIndex = taskData.findIndex((item) => item.id === currentTask.id);
     taskObj = {
         taskId: `${taskTitleInput.value.toLowerCase().split(" ").join("-")}-${Date.now()}`,
-    taskTitle: `${taskTitleInput.value}`,
-    taskDescription: `${taskDescriptionInput.value}`,
+        taskTitle: `${taskTitleInput.value}`,
+        taskDescription: `${taskDescriptionInput.value}`,
     };
     if (dataArrIndex === -1) {
         taskData.unshift(taskObj);
     }
-    taskData.forEach(({taskId, taskTitle, taskDescription}) => {
+    taskData.forEach(({ taskId, taskTitle, taskDescription }) => {
         tasksContainer.innerText += `
         <div id="${taskId}" class="task">
         <p><strong>Title:</strong> ${taskTitle}</p>
@@ -54,5 +67,5 @@ taskForm.addEventListener("submit", (e) => {
         </div>
         `;
     })
-    taskForm.classList.toggle("hidden");
+    reset();
 });
