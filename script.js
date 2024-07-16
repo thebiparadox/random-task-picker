@@ -15,10 +15,8 @@ const randomTaskOutput = document.getElementById("random-task-output");
 
 // create tasks //
 
-const taskData = JSON.parse(localStorage.getItem("data")) || [];
+const taskData = [];
 let currentTask = {};
-
-const addOrUpdateTask 
 
 // edit or delete tasks //
 
@@ -27,3 +25,11 @@ const addOrUpdateTask
 // random task output //
 
 // button functionality //
+openTaskFormBtn.addEventListener("click", (e) => taskForm.classList.toggle("hidden"));
+closeTaskFormBtn.addEventListener("click", (e) => confirmCloseDialog.showModal());
+cancelBtn.addEventListener("click", (e) => confirmCloseDialog.close());
+discardBtn.addEventListener("click", (e) => {
+        confirmCloseDialog.close();
+        taskForm.classList.toggle("hidden");
+});
+taskForm.addEventListener("submit", (e) => {e.preventDefault()});
