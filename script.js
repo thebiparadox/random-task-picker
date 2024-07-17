@@ -14,7 +14,7 @@ const randomizeTasksContainer = document.getElementById("randomize-tasks-contain
 const randomizeTasksBtn = document.getElementById("randomize-tasks-btn");
 const randomTaskOutput = document.getElementById("random-task-output");
 
-// create tasks //
+// create and update tasks //
 
 const taskData = [];
 let currentTask = {};
@@ -29,19 +29,28 @@ const addOrUpdateTask = () => {
     if (dataArrIndex === -1) {
         taskData.unshift(taskObj);
     }
+    updateTaskContainer();
+    reset();
 };
 
 const updateTaskContainer = () => {
+    tasksContainer.innerHTML = "";
     taskData.forEach(({ id, taskTitle, taskDescription }) => {
         tasksContainer.innerHTML += `
         <div id="${id}" class="task">
         <p><strong>Title:</strong> ${taskTitle}</p>
         <p><strong>Description:</strong> ${taskDescription}</p>
-        <button class="btn" type="button">Edit</button>
-        <button class="btn" type="button">Delete</button>
+        <button class="btn" type="button" onclick="editTask(this)">Edit</button>
+        <button class="btn" type="button" onclick="deleteTask(this)">Delete</button>
         </div>
         `
     })
+}
+
+const deleteTask = (buttonEl) => {
+const dataArrIndex = taskData.findIndex((item) => item.id === buttonEl.parentElement.id);
+buttonEl.parentElement.remove();
+taskData.splice(dataArrIndex, 1);
 }
 
 const reset = () => {
@@ -50,8 +59,6 @@ const reset = () => {
     taskForm.classList.toggle("hidden");
     currentTask = {};
 };
-
-// edit or delete tasks //
 
 // randomize tasks //
 
@@ -78,5 +85,5 @@ discardBtn.addEventListener("click", () => {
 
 taskForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    reset();
+    addOrUpdateTask();
 });
