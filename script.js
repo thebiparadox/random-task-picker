@@ -28,6 +28,8 @@ const addOrUpdateTask = () => {
     };
     if (dataArrIndex === -1) {
         taskData.unshift(taskObj);
+    } else {
+        taskData[dataArrIndex] = taskObj;
     }
     updateTaskContainer();
     reset();
@@ -48,9 +50,19 @@ const updateTaskContainer = () => {
 }
 
 const deleteTask = (buttonEl) => {
-const dataArrIndex = taskData.findIndex((item) => item.id === buttonEl.parentElement.id);
-buttonEl.parentElement.remove();
-taskData.splice(dataArrIndex, 1);
+    const dataArrIndex = taskData.findIndex((item) => item.id === buttonEl.parentElement.id);
+    buttonEl.parentElement.remove();
+    taskData.splice(dataArrIndex, 1);
+}
+
+const editTask = (buttonEl) => {
+    const dataArrIndex = taskData.findIndex(
+        (item) => item.id === buttonEl.parentElement.id);
+    currentTask = taskData[dataArrIndex];
+    taskTitleInput.value = currentTask.taskTitle;
+    taskDescriptionInput.value = currentTask.taskDescription;
+    addOrUpdateTaskBtn.innerText = "Update Task";
+    taskForm.classList.toggle("hidden");
 }
 
 const reset = () => {
@@ -69,7 +81,8 @@ openTaskFormBtn.addEventListener("click", () => taskForm.classList.toggle("hidde
 
 closeTaskFormBtn.addEventListener("click", () => {
     const formInputsContainValues = taskTitleInput.value || taskDescriptionInput.value;
-    if (formInputsContainValues) {
+    const formInputValuesUpdated = taskTitleInput.value !== currentTask.taskTitle || taskDescriptionInput.value !== currentTask.taskDescription;
+    if (formInputsContainValues && formInputValuesUpdated) {
         confirmCloseDialog.showModal();
     } else {
         reset();
